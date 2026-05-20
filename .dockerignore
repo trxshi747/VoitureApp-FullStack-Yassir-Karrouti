@@ -1,0 +1,13 @@
+.gradle
+build/*
+!build/libs/
+!build/libs/app.jar
+myapp
+src/main/webapp/reactjs/node_modules
+src/main/webapp/reactjs/build
+.idea
+.tmp
+.npm-cache
+*.log
+*.pdf
+1.png

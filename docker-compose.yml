@@ -1,0 +1,54 @@
+services:
+  mysqldb:
+    image: mysql:latest
+    container_name: mysqldb
+    restart: always
+    ports:
+      - "3307:3306"
+    env_file:
+      - .mysqlenv
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    restart: always
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama-data:/root/.ollama
+    entrypoint: /bin/sh
+    command: -c "ollama serve & sleep 10 && ollama pull llama2 && wait"
+
+  springboot-app:
+    build: .
+    container_name: springboot-app
+    restart: always
+    depends_on:
+      - mysqldb
+      - ollama
+    ports:
+      - "9090:8082"
+    env_file:
+      - .env
+    environment:
+      - OLLAMA_BASE_URL=http://ollama:11434
+      - OLLAMA_CHAT_MODEL=llama2
+      - MYSQL_HOST=mysqldb
+      - MYSQL_PORT=3306
+
+  react-frontend:
+    build:
+      context: ./src/main/webapp/reactjs
+    container_name: react-frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - springboot-app
+    stdin_open: true 
+    tty: true
+
+volumes:
+  mysql-data:
+  ollama-data:
