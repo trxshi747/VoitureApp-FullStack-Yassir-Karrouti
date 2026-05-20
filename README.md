@@ -1,17 +1,17 @@
-# 🚗 Magasin de Voitures Connecté (Spring Boot + React + Ollama AI)
+#  Magasin de Voitures Connecté (Spring Boot + React + Ollama AI)
 
 Une application Full-Stack moderne pour la gestion de stock automobile, enrichie par l'Intelligence Artificielle locale (Ollama).
 
-## 🌟 Fonctionnalités
+##  Fonctionnalités
 - **Gestion CRUD** : Opérations complètes sur les véhicules (Marque, Modèle, Couleur, Année, Prix).
 - **Assistant IA (Ollama)** : 
-  - 🤖 **Résumés Intelligents** : Analyse automatique des caractéristiques du véhicule.
-  - 📝 **Quiz Interactifs** : Génération de quiz sur les véhicules avec plusieurs niveaux de difficulté.
-  - 💬 **Chat Dédié** : Discutez en direct avec l'IA à propos d'une voiture spécifique ou de manière générale.
+  -  **Résumés Intelligents** : Analyse automatique des caractéristiques du véhicule.
+  -  **Quiz Interactifs** : Génération de quiz sur les véhicules avec plusieurs niveaux de difficulté.
+  -  **Chat Dédié** : Discutez en direct avec l'IA à propos d'une voiture spécifique ou de manière générale.
 - **Documentation API** : Interface Swagger UI complète.
 - **Architecture Conteneurisée** : Déploiement simplifié via Docker.
 
-## 🛠️ Stack Technique
+##  Stack Technique
 - **Backend** : Java 21, Spring Boot 3.4.13, Spring Data JPA, Spring AI.
 - **Frontend** : React 18, React-Bootstrap, Axios, FontAwesome.
 - **Base de données** : MySQL / MariaDB.
@@ -20,7 +20,7 @@ Une application Full-Stack moderne pour la gestion de stock automobile, enrichie
 
 ---
 
-## 🚀 Guide de Démarrage Rapide
+##  Guide de Démarrage Rapide
 
 ### Prérequis
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/) installé et démarré.
@@ -43,23 +43,17 @@ Une application Full-Stack moderne pour la gestion de stock automobile, enrichie
 
 ---
 
-## 🔗 Accès aux Services
+##  Accès aux Services
 
 Une fois l'application lancée, vous pouvez accéder aux interfaces suivantes :
 
 | Service | URL | Description |
 | :--- | :--- | :--- |
 | **Frontend** | [http://localhost:3000](http://localhost:3000) | Interface utilisateur React (Gestion & IA) |
-| **Backend API** | [http://localhost:9090](http://localhost:9090) | Point d'entrée de l'API Spring Boot |
+| **Backend API** | [http://localhost:9090/api/](http://localhost:9090/api/) | Point d'entrée de l'API Spring Boot |
 | **Swagger UI** | [http://localhost:9090/swagger-ui.html](http://localhost:9090/swagger-ui.html) | Documentation interactive de l'API |
 | **IA Ollama** | [http://localhost:11434](http://localhost:11434) | Moteur d'IA local |
 
 ---
 
-## 💡 Notes pour l'Évaluation
-- L'application contient un `CommandLineRunner` qui injecte automatiquement des données de test (voitures et propriétaires) au démarrage.
-- L'IA utilise le modèle **Llama2**. Pour une meilleure réactivité, assurez-vous que Docker dispose d'au moins 4 Go de RAM alloués.
-- Si le bouton "Assistant IA" est lent à répondre la première fois, c'est que le modèle est en cours de chargement en mémoire vive.
-
----
 **Développé par** : Yassir Karrouti
