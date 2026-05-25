@@ -16,11 +16,10 @@ Une application Full-Stack moderne pour la gestion de stock automobile, enrichie
 - **Frontend** : React 18, React-Bootstrap, Axios, FontAwesome.
 - **Base de données** : MySQL / MariaDB.
 - **IA** : Ollama (Modèle Llama2).
-- **Déploiement** : Docker & Docker Compose.
 
 ---
 
-##  Guide de Démarrage Rapide
+##  Guide de Démarrage Rapide (Docker)
 
 ### Prérequis
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/) installé et démarré.
@@ -43,6 +42,53 @@ Une application Full-Stack moderne pour la gestion de stock automobile, enrichie
 
 ---
 
+##  Guide de Déploiement Kubernetes (Minikube)
+
+Si vous souhaitez déployer l'application sur un cluster Kubernetes local, suivez ces étapes :
+
+### Prérequis
+- [Minikube](https://minikube.sigs.k8s.io/docs/start/) installé.
+- `kubectl` installé.
+
+### Lancement étape par étape
+
+1. **Démarrer et préparer le cluster** :
+   Lancez Minikube et connectez votre terminal au daemon Docker de Minikube (à exécuter dans PowerShell).
+   ```powershell
+   minikube start
+   minikube -p minikube docker-env --shell powershell | Invoke-Expression
+   ```
+
+2. **Construire les images Docker locales** :
+   Construisez les images du Backend et du Frontend directement dans le cluster Minikube.
+   ```powershell
+   docker build -t springboot-crud-k8s:1.0 .
+   docker build -t react-frontend-k8s:1.0 .\src\main\webapp\reactjs
+   ```
+
+3. **Déployer la configuration et les services** :
+   Appliquez les manifestes Kubernetes dans cet ordre précis.
+   ```powershell
+   kubectl apply -f mysql-configMap.yaml
+   kubectl apply -f mysql-secrets.yaml
+   kubectl apply -f db-deployment.yaml
+   kubectl apply -f ollama-deployment.yaml
+   kubectl apply -f app-deployment.yaml
+   kubectl apply -f frontend-deployment.yaml
+   ```
+   *(Attendez quelques minutes que les pods soient au statut `Running`. Vous pouvez vérifier l'état avec `kubectl get pods`)*
+
+4. **Accéder à l'application** :
+   Une fois les pods déployés, ouvrez l'accès a l'applis :
+   ```powershell
+   kubectl port-forward service/react-frontend-svc 3000:3000
+   kubectl port-forward service/springboot-crud-svc 9090:9090
+   kubectl port-forward service/ollama 11434:11434
+   ```
+   Vous pouvez maintenant ouvrir l'application : [http://localhost:3000](http://localhost:3000)
+
+*(Optionnel) Ouvrir les dans chaque terminal*
+---
 ##  Accès aux Services
 
 Une fois l'application lancée, vous pouvez accéder aux interfaces suivantes :
@@ -56,4 +102,5 @@ Une fois l'application lancée, vous pouvez accéder aux interfaces suivantes :
 
 ---
 
+---
 **Développé par** : Yassir Karrouti
